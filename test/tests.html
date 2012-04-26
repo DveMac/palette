@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Palette Tests</title>
+     <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.2.0.css">
+  <script type="text/javascript" src="../vendor/md5.js"></script>
+  <script type="text/javascript" src="../lib/palette.js"></script>
+</head>
+<body>
+  <h1 id="qunit-header">Palette Tests</h1>
+  <h2 id="qunit-banner"></h2>
+  <ol id="qunit-tests"></ol>
+  <script src="http://code.jquery.com/qunit/qunit-1.2.0.js"></script>
+  <script type="text/javascript">
+
+    function validateColour(col) {
+      col = col.length ? col : [col]
+
+      var r = true;
+
+      for(var i=0; i < col.length; i++){
+        r &=  typeof col[i] === "object" && 
+              typeof col[i].rgb === "object" &&
+              col[i].rgb.length === 3;
+      }
+
+      return r;
+    }
+
+    test("Palette.randomColour", function() {
+      expect(2);
+
+      var col = Palette.randomColour();
+      ok(validateColour(col), 'Colour should be an object.');
+
+      var col2 = Palette.randomColour('#FFFFFF');
+      ok(validateColour(col2), 'Colour should be an object.');
+    });
+
+    test("Palette.randomColours", function() {
+      expect(6);
+
+      var col = Palette.randomColours();
+      ok(validateColour(col), 'Colour should be an object.');
+      equal(col.length, 1, 'Colours array length should be 1.');
+
+      var col2 = Palette.randomColours(3);
+      ok(validateColour(col2), 'Colour should be an object.');
+      equal(col2.length, 3, 'Colours array length should be 3.');
+
+      var col3 = Palette.randomColours(4,'#FFFFFF');
+      ok(validateColour(col3), 'Colour should be an object.');
+      equal(col3.length, 4, 'Colours array length should be 4.');
+    });
+
+    test("Palette.colourFromText", function() {
+      expect(3);
+
+      var col = Palette.colourFromText('hello'), col2 = Palette.colourFromText('hello');
+      ok(validateColour(col), 'Colour should be an object.');
+      equal(col.rgb.join(), '174,165,206','Hello should equal #aea5ce.');
+      equal(col.rgb.join(), col2.rgb.join(),'Colur should be consistant');
+
+    });
+
+
+  </script>
+</body>
+</html>
