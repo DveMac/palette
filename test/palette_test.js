@@ -1,15 +1,15 @@
 /*global require:true */
 var palette = require('../lib/palette.js');
 
-exports['awesome'] = {
+exports['Palette'] = {
   setUp: function(done) {
     // setup here
     done();
   },
-  'no args': function(test) {
+  'randomColour': function(test) {
     test.expect(1);
     // tests here
-    test.equal(palette.awesome(), 'awesome', 'should be awesome.');
+    test.equal(palette.randomColour().length, 7, 'Colour string length should be 7.');
     test.done();
   }
 };

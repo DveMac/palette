@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['<banner>', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
+        src: ['<banner>', 'vendor/**/*.js', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },
@@ -29,8 +29,8 @@ module.exports = function(grunt) {
       files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
     },
     watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint test'
+      files: ['<config:lint.files>', 'vendor/**/*.js'],
+      tasks: 'lint test concat min'
     },
     jshint: {
       options: {
