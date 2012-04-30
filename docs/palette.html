@@ -1,0 +1,110 @@
+<!DOCTYPE html>  <html> <head>   <title>palette.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               palette.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * palette</span>
+<span class="cm"> * https://github.com/dvemac/palette</span>
+<span class="cm"> *</span>
+<span class="cm"> * Copyright (c) 2012 Dve</span>
+<span class="cm"> * Licensed under the MIT license.</span>
+<span class="cm"> */</span>
+
+<span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">exports</span><span class="p">)</span> <span class="p">{</span>
+  <span class="s1">&#39;use strict&#39;</span><span class="p">;</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h2>Utility methods</h2>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">ensure</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">idx</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">def</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="nx">idx</span><span class="p">];</span>
+    <span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span>  <span class="k">typeof</span> <span class="nx">val</span> <span class="o">===</span> <span class="nx">type</span> <span class="o">&amp;&amp;</span> <span class="nx">val</span> <span class="o">||</span> <span class="nx">def</span><span class="p">;</span>
+    <span class="nx">v</span> <span class="o">=</span> <span class="nx">min</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">v</span> <span class="o">&lt;</span> <span class="nx">min</span> <span class="o">?</span> <span class="nx">min</span> <span class="o">:</span> <span class="nx">v</span><span class="p">;</span> 
+    <span class="nx">v</span> <span class="o">=</span> <span class="nx">max</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">v</span> <span class="o">&gt;</span> <span class="nx">min</span> <span class="o">?</span> <span class="nx">max</span> <span class="o">:</span> <span class="nx">v</span><span class="p">;</span> 
+    <span class="k">return</span> <span class="nx">v</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">number</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="nx">random</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">max</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">randoms</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">max</span><span class="p">,</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="nx">count</span> <span class="o">=</span> <span class="nx">count</span> <span class="o">||</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">(</span><span class="nx">count</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span> <span class="nx">r</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">number</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">max</span><span class="p">));</span> <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="nx">dechex</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dec</span><span class="p">){</span>
+      <span class="k">return</span> <span class="nx">dec</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">hexdec</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hex</span><span class="p">){</span>
+      <span class="nx">hex</span> <span class="o">=</span> <span class="nx">hex</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;0x&#39;</span> <span class="o">?</span> <span class="nx">hex</span> <span class="o">:</span> <span class="s1">&#39;0x&#39;</span> <span class="o">+</span> <span class="nx">hex</span><span class="p">;</span>
+      <span class="k">return</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">hex</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">padLeft</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pad</span><span class="p">,</span> <span class="nx">len</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">str</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">;</span> 
+      <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="nx">len</span><span class="o">+</span><span class="mi">1</span><span class="p">).</span><span class="nx">join</span><span class="p">(</span><span class="nx">pad</span><span class="p">)</span> <span class="o">+</span> <span class="nx">str</span><span class="p">).</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="nx">len</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>Colour</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h4>Constructor</h4>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">Colour</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rgb</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">rgb</span> <span class="o">=</span> <span class="nx">rgb</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="nx">Colour</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="nx">isValidHex</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">typeof</span> <span class="nx">hex</span> <span class="o">===</span> <span class="s2">&quot;string&quot;</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="sr">/#[0-9A-F]{6}/gi</span><span class="p">).</span><span class="nx">test</span><span class="p">(</span><span class="nx">hex</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">fromHexColour</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hex</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isValidHex</span><span class="p">(</span><span class="nx">hex</span><span class="p">))</span> <span class="p">{</span>
+        <span class="nx">hex</span> <span class="o">=</span> <span class="nx">hex</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nx">Colour</span><span class="p">([</span><span class="nx">hex</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nx">hex</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="nx">hex</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)]);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="nx">mixWithHexColour</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">r</span><span class="o">=</span><span class="p">[],</span> <span class="nx">t</span><span class="p">;</span>
+      <span class="nx">mix</span> <span class="o">=</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">isValidHex</span><span class="p">(</span><span class="nx">mix</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;FFFFFF&#39;</span> <span class="o">:</span> <span class="nx">mix</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">);</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="nx">t</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">((</span><span class="k">this</span><span class="p">.</span><span class="nx">rgb</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="nx">number</span><span class="p">.</span><span class="nx">hexdec</span><span class="p">(</span><span class="nx">mix</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">i</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="nx">r</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">Colour</span><span class="p">(</span><span class="nx">r</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <h2>Palette</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h4>Constructor</h4>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="kd">var</span> <span class="nx">Palette</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="p">};</span>
+
+  <span class="nx">Palette</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+
+    <span class="nx">randomColour</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">mixer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">rgb</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">randoms</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">Colour</span><span class="p">(</span><span class="nx">rgb</span><span class="p">).</span><span class="nx">mixWithHexColour</span><span class="p">(</span><span class="nx">mixer</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">randomColours</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">num</span><span class="p">,</span> <span class="nx">mixer</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">rgb</span><span class="p">,</span> <span class="nx">r</span><span class="o">=</span> <span class="p">[];</span>
+      <span class="nx">num</span> <span class="o">=</span> <span class="nx">num</span> <span class="o">||</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">while</span><span class="p">(</span><span class="nx">num</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">rgb</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">randoms</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="nx">r</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">new</span> <span class="nx">Colour</span><span class="p">(</span><span class="nx">rgb</span><span class="p">).</span><span class="nx">mixWithHexColour</span><span class="p">(</span><span class="nx">mixer</span><span class="p">));</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">r</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="nx">colourFromText</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">spec</span><span class="p">,</span> <span class="nx">mixer</span><span class="p">)</span> <span class="p">{</span> 
+      <span class="nx">spec</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">ensure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;number&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+
+      <span class="kd">var</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">exports</span><span class="p">.</span><span class="nx">md5</span><span class="p">(</span><span class="nx">text</span><span class="p">),</span> <span class="nx">rgb</span> <span class="o">=</span> <span class="p">[];</span>
+
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="nx">number</span><span class="p">.</span><span class="nx">hexdec</span><span class="p">(</span><span class="nx">hash</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">spec</span><span class="o">*</span><span class="nx">i</span><span class="p">,</span><span class="nx">spec</span><span class="p">));</span>
+        <span class="nx">rgb</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">~~</span><span class="p">(</span><span class="nx">base</span> <span class="o">/</span> <span class="p">(</span><span class="nx">number</span><span class="p">.</span><span class="nx">hexdec</span><span class="p">(</span><span class="nx">number</span><span class="p">.</span><span class="nx">padLeft</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="nx">spec</span><span class="p">)</span> <span class="p">))</span><span class="o">*</span><span class="mi">255</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="k">return</span> <span class="k">new</span> <span class="nx">Colour</span><span class="p">(</span><span class="nx">rgb</span><span class="p">).</span><span class="nx">mixWithHexColour</span><span class="p">(</span><span class="nx">mixer</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>export as singleton</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">exports</span><span class="p">.</span><span class="nx">Palette</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Palette</span><span class="p">();</span>
+
+<span class="p">}(</span><span class="k">typeof</span> <span class="nx">exports</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="nx">exports</span> <span class="o">||</span> <span class="k">this</span><span class="p">));</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

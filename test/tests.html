@@ -64,6 +64,31 @@
 
     });
 
+    test("Colour", function() {
+      expect(2);
+
+      var col = new Colour();
+      ok(!validateColour(col), 'Colour should be an object.');
+
+      var col2 = new Colour([128,128,128]);
+      ok(validateColour(col2), 'Colour should be an object.');
+    });
+
+    test("Colour.validateHex", function() {
+      expect(2);
+
+      var col = new Colour([128,128,128]);
+      equal(col.validateHex('sdfsdfdsf'), '#FFFFFF','Hex should not be valid.');
+      equal(col.validateHex('#1234FF'), '#1234FF' ,'Hex should be valid.');
+    });
+
+    test("Colour.fromHexColour", function() {
+      expect(2);
+
+      var col = new Colour([128,128,128]);
+      equal(col.fromHexColour('sdfsdfdsf').rgb.join(), '255,255,255', 'Colour should be null.');
+      equal(col.fromHexColour('#808080').rgb.join(), '128,128,128', 'Colour should be valid RGB.');
+    });
 
   </script>
 </body>

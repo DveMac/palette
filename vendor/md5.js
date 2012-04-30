@@ -273,4 +273,4 @@
     } else {
         $.md5 = md5;
     }
-}(this));
+}(typeof exports === 'object' && exports || this));

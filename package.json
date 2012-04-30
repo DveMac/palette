@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "homepage": "https://github.com/dvemac/palette",
   "author": {
-    "name": "Dve"
+    "name": "Dve",
+    "email": "projects@milkjar.co.uk"
   },
   "repository": {
     "type": "git",
