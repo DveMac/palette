@@ -90,6 +90,13 @@
       equal(col.fromHexColour('#808080').rgb.join(), '128,128,128', 'Colour should be valid RGB.');
     });
 
+    test("Colour.toHexColour", function() {
+      expect(1);
+
+      var col = new Colour([128,128,128]);
+      equal(col.toHexColour(), '#808080', 'Colour should be valid RGB.');
+    });
+
   </script>
 </body>
 </html>

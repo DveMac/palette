@@ -367,6 +367,12 @@
       }));
     },
 
+    toHexColour: function() {
+      return '#' + map(this.rgb, function(c){
+        return number.dechex(c);
+      }).join('');
+    },
+
     mixWithHexColour: function(mix) {
       mix = new Colour().fromHexColour(mix);
       return new Colour(map(range(0,2), function(i){
